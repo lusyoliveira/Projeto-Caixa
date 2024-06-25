@@ -8,7 +8,7 @@
             txtConta.Focus()
             Exit Function
         End If
-        tbMovimento = RecebeTabela("Select * from tbMovimento where codconta= " & txtConta.Text)
+        tbMovimento = RecebeTabela("Select * from tbMovimento where codconta= " & txtConta.Text, tpServidor.SqlServer)
         If tbMovimento.EOF Then
             MsgBox("A conta não existe!", MsgBoxStyle.Critical)
             txtConta.Focus()
@@ -39,7 +39,7 @@
         'txtValor.Text = total
 
         'soma valor
-        tbMovimento = RecebeTabela("Select sum(valor) as valor from tbMovimento where codconta = " & txtConta.Text)
+        tbMovimento = RecebeTabela("Select sum(valor) as valor from tbMovimento where codconta = " & txtConta.Text, tpServidor.SqlServer)
         If tbMovimento.RecordCount <> 0 Then
             txtValor.Text = FormatCurrency(tbMovimento("valor").Value)
         Else
@@ -52,7 +52,7 @@
     Private Sub btnDeposito_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeposito.Click
         Dim tbMovimento, tbContas As ADODB.Recordset
 
-        tbContas = RecebeTabela("select * from tbContas where codconta = " & txtConta.Text)
+        tbContas = RecebeTabela("select * from tbContas where codconta = " & txtConta.Text, tpServidor.SqlServer)
         If txtConta.Text = tbContas("codconta").Value Then
             If txtValor.Text > 0 Then
                 tbMovimento = RecebeTabela("insert into tbMovimento (codconta,valor) values (" & txtConta.Text & ", " & txtValor.Text & ")")
@@ -69,7 +69,7 @@
         Dim tbMovimento As ADODB.Recordset
 
         VerificaValor()
-        tbMovimento = RecebeTabela("select * from tbMovimento")
+        tbMovimento = RecebeTabela("select * from tbMovimento", tpServidor.SqlServer)
         If txtValor.Text > 0 Then
             If tbMovimento("saldo").Value < txtValor.Text Then
                 MsgBox(" Saldo Insuficiente!", MsgBoxStyle.Critical)
