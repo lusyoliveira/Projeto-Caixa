@@ -4,4 +4,8 @@
         frmAbreCaixa.MdiParent = Me
         frmAbreCaixa.Show()
     End Sub
+
+    Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetConnection()
+    End Sub
 End Class

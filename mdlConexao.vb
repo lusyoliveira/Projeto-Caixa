@@ -1,61 +1,31 @@
-Imports System.Data.Common
-Imports System.Configuration
 Imports System.ServiceProcess
 Module mdlConexao
-    Private cn As DbConnection
+    Public Servidor = GetNomeSQLServer()
+    Public DataBase = "dbCaixa"
+    Public user = "sa"
+    Public password = "123456"
+    Public strConexao As String
 
-    Const DataBase = "dbCaixa"
-    Const user = "sa"
-    Const password = "123456"
-    Private Server = "(local)"
-
-    Public Enum tpServidor
-        Access = 0
-        SqlServer = 1
-        MySQL = 2
-        PostgreSQL = 3
-        Oracle = 4
-        SQLite = 5
-    End Enum
-
-    Private Function GetConnectionString(ByVal servidor As tpServidor) As String
-        Select Case servidor
-            Case tpServidor.SqlServer
-                Return $"Server={Server};Database={DataBase};User Id={user};Password={password};"
-            Case tpServidor.MySQL
-                Return $"Server={Server};Database={DataBase};User={user};Password={password};"
-            Case tpServidor.PostgreSQL
-                Return $"Host={Server};Database={DataBase};Username={user};Password={password};"
-            Case tpServidor.Oracle
-                Return $"Data Source={Server};User Id={user};Password={password};"
-            Case tpServidor.SQLite
-                Dim dbPath As String = My.Computer.FileSystem.CurrentDirectory & If(Right(My.Computer.FileSystem.CurrentDirectory, 1) = "\", "", "\") & DataBase & ".sqlite"
-                Return $"Data Source={dbPath};Version=3;"
-            Case Else ' Access
-                Dim acess_db2 As String = My.Computer.FileSystem.CurrentDirectory
-                acess_db2 &= If(Right(acess_db2, 1) = "\", "", "\")
-                acess_db2 &= DataBase & ".mdb"
-                Return $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={DataBase};Persist Security Info=False"
-        End Select
+    ''' <summary>
+    ''' Esta função gera a string de conexão e retorna o dados da conexão.
+    ''' </summary>
+    ''' <returns>Retorna string de conexão.</returns>
+    Public Function GetConnection() As System.Data.IDbConnection
+        strConexao = $"Data Source={Servidor};Initial Catalog={DataBase};User ID={user}; Password={password};Integrated Security=True"
     End Function
-
-    Private Function GetProviderInvariantName(ByVal servidor As tpServidor) As String
-        Select Case servidor
-            Case tpServidor.SqlServer
-                Server = GetNomeSQLServer()
-                Return "System.Data.SqlClient"
-            Case tpServidor.MySQL
-                Return "MySql.Data.MySqlClient"
-            Case tpServidor.PostgreSQL
-                Return "Npgsql"
-            Case tpServidor.Oracle
-                Return "Oracle.ManagedDataAccess.Client"
-            Case tpServidor.SQLite
-                Return "System.Data.SQLite"
-            Case Else ' Access
-                Return "System.Data.OleDb"
-        End Select
-    End Function
+    Public Sub AlterarStringDeConexao()
+        Dim Config = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.None)
+        Dim ConnectionStrings = Config.ConnectionStrings
+        For Each ConnectionString As System.Configuration.ConnectionStringSettings In ConnectionStrings.ConnectionStrings
+            ConnectionString.ConnectionString = String.Format($"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Servidor}\{DataBase}.mdb", Environment.CurrentDirectory)
+        Next
+        Config.Save(System.Configuration.ConfigurationSaveMode.Modified)
+        System.Configuration.ConfigurationManager.RefreshSection("connectionStrings")
+    End Sub
+    ''' <summary>
+    ''' Esta função obtem o nome do servidor SQL Server.
+    ''' </summary>
+    ''' <returns>Retorna o nome do servidor.</returns>
     Public Function GetNomeSQLServer() As String
         'Nome do PC local
         Dim strPCname As String = Environment.MachineName
@@ -81,30 +51,6 @@ Module mdlConexao
             strNomeSQLServer = strPCname + "\" + strNomeSQLServer.Substring(IndiceInicio + 1)
         End If
         Return strNomeSQLServer
-    End Function
-    Public Function RecebeTabela(ByVal Sql As String, Optional ByVal servidor As tpServidor = tpServidor.Access) As DataTable
-        Dim factory As DbProviderFactory = DbProviderFactories.GetFactory(GetProviderInvariantName(servidor))
-        cn = factory.CreateConnection()
-        cn.ConnectionString = GetConnectionString(servidor)
-
-        Dim dt As New DataTable()
-        Try
-            cn.Open()
-            Dim cmd As DbCommand = cn.CreateCommand()
-            cmd.CommandText = Sql
-            Dim adapter As DbDataAdapter = factory.CreateDataAdapter()
-            adapter.SelectCommand = cmd
-            adapter.Fill(dt)
-        Catch ex As Exception
-            dt = Nothing
-            MsgBox("Banco de Dados não encontrado!")
-        Finally
-            If cn.State = ConnectionState.Open Then
-                cn.Close()
-            End If
-        End Try
-
-        Return dt
     End Function
 
 End Module

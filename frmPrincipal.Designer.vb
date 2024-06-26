@@ -23,9 +23,9 @@ Partial Class frmPrincipal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.MovimentoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaixaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -39,15 +39,6 @@ Partial Class frmPrincipal
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 641)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1426, 22)
-        Me.StatusStrip1.TabIndex = 2
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
         'MovimentoToolStripMenuItem
         '
         Me.MovimentoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CaixaToolStripMenuItem})
@@ -58,8 +49,17 @@ Partial Class frmPrincipal
         'CaixaToolStripMenuItem
         '
         Me.CaixaToolStripMenuItem.Name = "CaixaToolStripMenuItem"
-        Me.CaixaToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.CaixaToolStripMenuItem.Size = New System.Drawing.Size(128, 26)
         Me.CaixaToolStripMenuItem.Text = "Caixa"
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 641)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(1426, 22)
+        Me.StatusStrip1.TabIndex = 2
+        Me.StatusStrip1.Text = "StatusStrip1"
         '
         'frmPrincipal
         '
