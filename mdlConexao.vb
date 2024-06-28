@@ -1,7 +1,7 @@
 Imports System.ServiceProcess
 Module mdlConexao
     Public Servidor = GetNomeSQLServer()
-    Public DataBase = "dbCaixa"
+    Public DataBase = "dbBancoFin"
     Public user = "sa"
     Public password = "123456"
     Public strConexao As String

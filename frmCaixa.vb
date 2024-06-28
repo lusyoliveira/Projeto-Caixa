@@ -6,8 +6,11 @@ Public Class frmCaixa
 
         ' Verifica se é número
         If Not IsNumeric(txtConta.Text) Then
-            MsgBox("A conta deve ser numérica!", MsgBoxStyle.Critical)
+            MsgBox("A conta deve ser numérica!", MsgBoxStyle.Exclamation)
             txtConta.Focus()
+            Return False
+        ElseIf txtConta.Text = "" Then
+            MsgBox("A conta deve ser preenchida!", MsgBoxStyle.Exclamation)
             Return False
         End If
 

@@ -36,7 +36,7 @@ Partial Class frmCaixa
         'txtConta
         '
         Me.txtConta.Location = New System.Drawing.Point(71, 57)
-        Me.txtConta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtConta.Margin = New System.Windows.Forms.Padding(4)
         Me.txtConta.Name = "txtConta"
         Me.txtConta.Size = New System.Drawing.Size(132, 22)
         Me.txtConta.TabIndex = 0
@@ -44,7 +44,7 @@ Partial Class frmCaixa
         'txtValor
         '
         Me.txtValor.Location = New System.Drawing.Point(71, 101)
-        Me.txtValor.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtValor.Margin = New System.Windows.Forms.Padding(4)
         Me.txtValor.Name = "txtValor"
         Me.txtValor.Size = New System.Drawing.Size(132, 22)
         Me.txtValor.TabIndex = 1
@@ -73,7 +73,7 @@ Partial Class frmCaixa
         'btnSaldo
         '
         Me.btnSaldo.Location = New System.Drawing.Point(229, 79)
-        Me.btnSaldo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaldo.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaldo.Name = "btnSaldo"
         Me.btnSaldo.Size = New System.Drawing.Size(100, 28)
         Me.btnSaldo.TabIndex = 4
@@ -83,7 +83,7 @@ Partial Class frmCaixa
         'btnDeposito
         '
         Me.btnDeposito.Location = New System.Drawing.Point(25, 177)
-        Me.btnDeposito.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDeposito.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDeposito.Name = "btnDeposito"
         Me.btnDeposito.Size = New System.Drawing.Size(100, 28)
         Me.btnDeposito.TabIndex = 5
@@ -93,7 +93,7 @@ Partial Class frmCaixa
         'btnSaque
         '
         Me.btnSaque.Location = New System.Drawing.Point(195, 177)
-        Me.btnSaque.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaque.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaque.Name = "btnSaque"
         Me.btnSaque.Size = New System.Drawing.Size(100, 28)
         Me.btnSaque.TabIndex = 6
@@ -110,9 +110,9 @@ Partial Class frmCaixa
         Me.grpMovimento.Controls.Add(Me.lblValor)
         Me.grpMovimento.Controls.Add(Me.lblConta)
         Me.grpMovimento.Location = New System.Drawing.Point(16, 15)
-        Me.grpMovimento.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpMovimento.Margin = New System.Windows.Forms.Padding(4)
         Me.grpMovimento.Name = "grpMovimento"
-        Me.grpMovimento.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpMovimento.Padding = New System.Windows.Forms.Padding(4)
         Me.grpMovimento.Size = New System.Drawing.Size(347, 256)
         Me.grpMovimento.TabIndex = 7
         Me.grpMovimento.TabStop = False
@@ -125,7 +125,8 @@ Partial Class frmCaixa
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(379, 286)
         Me.Controls.Add(Me.grpMovimento)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmCaixa"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Tela de Movimento"
